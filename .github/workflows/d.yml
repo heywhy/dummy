@@ -1,1 +1,7 @@
 name: Deployment
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - echo tests
