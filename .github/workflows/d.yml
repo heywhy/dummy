@@ -8,9 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo tests
+      
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo build
   
   deploy-staging:
-    needs: [test]
+    needs: [build]
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -18,7 +25,7 @@ jobs:
       - run: echo staging
       
   deploy-sandbox:
-    needs: [test]
+    needs: [build]
     runs-on: ubuntu-latest
     environment: sandbox
     steps:
@@ -26,7 +33,7 @@ jobs:
       - run: echo sandbox
 
   deploy-production:
-    needs: [test]
+    needs: [build]
     runs-on: ubuntu-latest
     environment: production
     steps:
